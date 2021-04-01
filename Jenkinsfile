@@ -22,9 +22,9 @@ pipeline {
 		sh "ls"
             }
         }
-		stage('Benchmark') { 
+		 stage('Benchmark') { 
             steps {
-                benchmark (inputLocation: '', schemaSelection: 'Simplest - 1 level - One result only with parameters & thresholds.' , truncateStrings: 'true')
+                benchmark (	inputLocation: '', schemaSelection: ''Simplest - 1 level - One result only with parameters & thresholds.' , truncateStrings: 'true', altInputSchema: '', altInputSchemaLocation: '')
             }
         }
     }

@@ -5,6 +5,7 @@ import com.logitech.integration.test.helpers.config.*
 import org.junit.Test
 import androidx.benchmark.junit4.BenchmarkRule
 import androidx.benchmark.junit4.measureRepeated
+import org.junit.Rule
 
 
 /**

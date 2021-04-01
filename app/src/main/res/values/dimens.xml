@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toggle_button_height">96dp</dimen>
+    <dimen name="toggle_button_width">96dp</dimen>
+</resources>

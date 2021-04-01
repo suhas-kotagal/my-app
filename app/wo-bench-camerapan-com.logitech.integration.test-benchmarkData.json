@@ -1,0 +1,87 @@
+{
+    "context": {
+        "build": {
+            "device": "sdm845",
+            "fingerprint": "Logitech/sdm845/sdm845:10/QKQ1.200308.002/98.200.20:user/test-keys",
+            "model": "VR0019",
+            "version": {
+                "sdk": 29
+            }
+        },
+        "cpuCoreCount": 8,
+        "cpuLocked": false,
+        "cpuMaxFreqHz": -1,
+        "memTotalBytes": 5958094848,
+        "sustainedPerformanceModeEnabled": false
+    },
+    "benchmarks": [
+        {
+            "name": "DEBUGGABLE_CODE-COVERAGE_UNSUSTAINED-ACTIVITY-MISSING_cameraPanAbsoluteTest[1]",
+            "params": {},
+            "className": "com.logitech.integration.test.camera.CameraPtzTestBlueShell",
+            "totalRunTimeNs": 3331175400083,
+            "metrics": {
+                "timeNs": {
+                    "minimum": 32065321915,
+                    "maximum": 60149882633,
+                    "median": 32075164650,
+                    "runs": [
+                        60060272008,
+                        32071575665,
+                        60149882633,
+                        32068546914,
+                        60090070185,
+                        32069186655,
+                        32065321915,
+                        60056268467,
+                        32072801707,
+                        32075424051,
+                        60055914144,
+                        32067166707,
+                        32068991810,
+                        60056274873,
+                        32074789259,
+                        32068944988,
+                        60054136592,
+                        32069123842,
+                        32072070769,
+                        60056062530,
+                        32073802279,
+                        32074568999,
+                        60055733884,
+                        32075461342,
+                        32074745144,
+                        60059599612,
+                        32069973582,
+                        32071709206,
+                        60057363258,
+                        32074583998,
+                        32110748165,
+                        60058937008,
+                        32074171029,
+                        32074248112,
+                        60056496227,
+                        32076296967,
+                        32068813321,
+                        60069039300,
+                        32069724884,
+                        32074905248,
+                        60058910811,
+                        32076167801,
+                        32069843738,
+                        60058147894,
+                        32074025092,
+                        32076053165,
+                        60057393623,
+                        32079106967,
+                        32072282227,
+                        60059403779
+                    ]
+                }
+            },
+            "warmupIterations": 30,
+            "repeatIterations": 1,
+            "thermalThrottleSleepSeconds": 0
+        }
+    ]
+}

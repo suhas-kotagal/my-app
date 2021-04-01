@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?><testsuites><testsuite name="junit.framework.TestSuite$1"><testcase classname="junit.framework.TestSuite$1" name="warning" time="0.005"><failure message="junit.framework.AssertionFailedError: No tests found in com.logitech.integration.test.remote.RemoteTest" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: No tests found in com.logitech.integration.test.remote.RemoteTest
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:97)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:115)
+	at junit.framework.TestResult.runProtected(TestResult.java:133)
+	at junit.framework.TestResult.run(TestResult.java:118)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:195)
+	at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:181)
+	at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:564)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2202)
+</failure></testcase></testsuite></testsuites>

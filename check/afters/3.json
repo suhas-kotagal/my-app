@@ -1,0 +1,87 @@
+{
+    "context": {
+        "build": {
+            "device": "sdm845",
+            "fingerprint": "Logitech/sdm845/sdm845:10/QKQ1.200308.002/98.200.20:userdebug/test-keys",
+            "model": "VR0019",
+            "version": {
+                "sdk": 29
+            }
+        },
+        "cpuCoreCount": 8,
+        "cpuLocked": false,
+        "cpuMaxFreqHz": -1,
+        "memTotalBytes": 5958094848,
+        "sustainedPerformanceModeEnabled": false
+    },
+    "benchmarks": [
+        {
+            "name": "DEBUGGABLE_CODE-COVERAGE_UNLOCKED_UNSUSTAINED-ACTIVITY-MISSING_audioControlTest",
+            "params": {},
+            "className": "com.logitech.integration.test.audio.AudioTest",
+            "totalRunTimeNs": 41384421442,
+            "metrics": {
+                "timeNs": {
+                    "minimum": 498170469,
+                    "maximum": 560272761,
+                    "median": 505068880,
+                    "runs": [
+                        503664062,
+                        560272761,
+                        505656718,
+                        503310677,
+                        505064115,
+                        508612344,
+                        504115729,
+                        504315573,
+                        505670990,
+                        506007031,
+                        505733021,
+                        504997760,
+                        503847031,
+                        505654844,
+                        503070104,
+                        508347240,
+                        505659322,
+                        508069687,
+                        505073645,
+                        505205156,
+                        510289947,
+                        500715990,
+                        506814739,
+                        502490364,
+                        506711042,
+                        506968333,
+                        503162604,
+                        509535365,
+                        498170469,
+                        504126354,
+                        504486979,
+                        556273958,
+                        504290572,
+                        507028125,
+                        503028698,
+                        507862865,
+                        502821719,
+                        504545520,
+                        504317864,
+                        507213386,
+                        504779948,
+                        503878750,
+                        506417604,
+                        503735157,
+                        505267447,
+                        508156875,
+                        506610937,
+                        504825989,
+                        504330260,
+                        504004792
+                    ]
+                }
+            },
+            "warmupIterations": 30,
+            "repeatIterations": 1,
+            "thermalThrottleSleepSeconds": 0
+        }
+    ]
+}

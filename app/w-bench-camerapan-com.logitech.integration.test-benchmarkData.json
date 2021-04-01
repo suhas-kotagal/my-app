@@ -1,0 +1,87 @@
+{
+    "context": {
+        "build": {
+            "device": "sdm845",
+            "fingerprint": "Logitech/sdm845/sdm845:10/QKQ1.200308.002/98.200.20:userdebug/test-keys",
+            "model": "VR0019",
+            "version": {
+                "sdk": 29
+            }
+        },
+        "cpuCoreCount": 8,
+        "cpuLocked": false,
+        "cpuMaxFreqHz": -1,
+        "memTotalBytes": 5958094848,
+        "sustainedPerformanceModeEnabled": false
+    },
+    "benchmarks": [
+        {
+            "name": "DEBUGGABLE_CODE-COVERAGE_UNLOCKED_UNSUSTAINED-ACTIVITY-MISSING_cameraPanAbsoluteTest[1]",
+            "params": {},
+            "className": "com.logitech.integration.test.camera.CameraPtzTestBlueShell",
+            "totalRunTimeNs": 5180893805940,
+            "metrics": {
+                "timeNs": {
+                    "minimum": 36640723631,
+                    "maximum": 92740564964,
+                    "median": 64650382814,
+                    "runs": [
+                        92740564964,
+                        64669821433,
+                        64846745236,
+                        64637754506,
+                        64978464663,
+                        36640723631,
+                        64637164298,
+                        64660065288,
+                        64646963360,
+                        64720896434,
+                        64617606590,
+                        64636137059,
+                        64589602476,
+                        64654025080,
+                        64616571330,
+                        64706437528,
+                        64951938778,
+                        64620062059,
+                        64608383985,
+                        64686134038,
+                        64656844194,
+                        64985120704,
+                        64550001694,
+                        64633850653,
+                        64704621017,
+                        64647113777,
+                        64631527996,
+                        64597043934,
+                        64637535027,
+                        64653369663,
+                        64910258361,
+                        64678887528,
+                        64978731173,
+                        64607233777,
+                        64670184194,
+                        64580466642,
+                        65014106798,
+                        64637297475,
+                        65026222266,
+                        64582577423,
+                        64658439089,
+                        64647395965,
+                        64637659975,
+                        64614738934,
+                        64614939924,
+                        64670164923,
+                        64703739194,
+                        64603575340,
+                        65128379194,
+                        64973716226
+                    ]
+                }
+            },
+            "warmupIterations": 30,
+            "repeatIterations": 1,
+            "thermalThrottleSleepSeconds": 0
+        }
+    ]
+}

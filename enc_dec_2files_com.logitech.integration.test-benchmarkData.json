@@ -1,0 +1,87 @@
+{
+    "context": {
+        "build": {
+            "device": "sdm845",
+            "fingerprint": "Logitech/sdm845/sdm845:10/QKQ1.200308.002/98.200.20:userdebug/test-keys",
+            "model": "VR0019",
+            "version": {
+                "sdk": 29
+            }
+        },
+        "cpuCoreCount": 8,
+        "cpuLocked": false,
+        "cpuMaxFreqHz": -1,
+        "memTotalBytes": 5958094848,
+        "sustainedPerformanceModeEnabled": false
+    },
+    "benchmarks": [
+        {
+            "name": "DEBUGGABLE_CODE-COVERAGE_UNLOCKED_UNSUSTAINED-ACTIVITY-MISSING_encodeDecode[0]",
+            "params": {},
+            "className": "com.logitech.integration.test.camera.CameraPtzTestBlueShell",
+            "totalRunTimeNs": 1817589179984,
+            "metrics": {
+                "timeNs": {
+                    "minimum": 22516431450,
+                    "maximum": 23344862699,
+                    "median": 22657011059,
+                    "runs": [
+                        22565642908,
+                        22656257751,
+                        22610156710,
+                        23004190929,
+                        22643789888,
+                        22647266398,
+                        22670765564,
+                        22610715460,
+                        22628462544,
+                        22716593116,
+                        22677201241,
+                        23078281919,
+                        22589950460,
+                        22607048794,
+                        22638755356,
+                        22516431450,
+                        22571253897,
+                        22972851293,
+                        22696610460,
+                        22664010772,
+                        23344862699,
+                        22603687648,
+                        22791277335,
+                        22694521763,
+                        22823194105,
+                        22653508377,
+                        22573793794,
+                        22662403324,
+                        22663191867,
+                        22780361658,
+                        22630819262,
+                        22864259523,
+                        22594761867,
+                        22551661033,
+                        22676921554,
+                        22994390512,
+                        22635674731,
+                        22657764367,
+                        22578689523,
+                        22644902856,
+                        22682754002,
+                        22612528689,
+                        23016730356,
+                        22626726502,
+                        22931115252,
+                        22621783116,
+                        22765639262,
+                        22622791606,
+                        22914157439,
+                        22667557960
+                    ]
+                }
+            },
+            "warmupIterations": 30,
+            "repeatIterations": 1,
+            "thermalThrottleSleepSeconds": 0
+        }
+    ]
+}

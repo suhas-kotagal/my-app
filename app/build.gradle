@@ -1,0 +1,394 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs"
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    defaultConfig {
+        applicationId "com.logitech.integration.test"
+        minSdkVersion 29
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        //testInstrumentationRunner "com.zutubi.android.junitreport.JUnitReportTestRunner"
+        testInstrumentationRunnerArgument 'androidx.benchmark.suppressErrors', 'CODE-COVERAGE,ACTIVITY-MISSING,UNSUSTAINED-ACTIVITY-MISSING,UNLOCKED,DEBUGGABLE'
+        testInstrumentationRunnerArgument 'androidx.benchmark.output.enable' , 'true'
+        //testInstrumentationRunnerArgument 'androidx.benchmark.startupMode.enable' , 'true'
+//        testBuildType System.getProperty('testBuildType', 'release')
+        //testInstrumentationRunner "androidx.benchmark.junit4.AndroidBenchmarkRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            testCoverageEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+ext {
+    camerax_version = "1.0.0-beta11"
+    nav_version = "2.3.1"
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'com.github.tony19:logback-android:2.0.0'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation files('libs/javax.xml.bind.jar')
+    implementation files('libs/android-junit-report-dev.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4'
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha18"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:1.0.0-alpha18"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+
+    // Navigation library
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation "io.mockk:mockk-android:1.10.0"
+
+
+    compileOnly files(getZoomVendorLib())
+    implementation files(getVCServiceLib())
+
+    // Instrumented testing
+    androidTestCompileOnly files(getZoomVendorLib())
+    androidTestImplementation files(getVCServiceLib())
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.benchmark:benchmark-junit4:1.0.0'
+
+    androidTestImplementation "io.mockk:mockk-android:1.10.0"
+    androidTestImplementation 'com.google.guava:guava:29.0-android'
+}
+
+String getZoomVendorLib(){
+    //File zoomLib = new File("${getKongHome()}/out/soong/.intermediates/vendor/logi/frogger/frameworks/Zoom/com.logitech.platform.zoomvendor/android_common/combined/com.logitech.platform.zoomvendor.jar")
+    File zoomLib = new File("com.logitech.platform.zoomvendor.jar")
+    if (!zoomLib.isFile()){
+        throw new GradleException("Zoom vendor lib is missing, build AOSP first, expected file ${zoomLib}")
+    }
+    return zoomLib.canonicalPath
+}
+
+String getKongHome(){
+    return new File(project.rootDir, "../../../../").canonicalPath
+}
+
+String getVCServiceLib(){
+    File vcLib = new File("app/libs/LibLogiSystemService.jar")
+    if (!vcLib.isFile()){
+        throw new GradleException("VC services lib is missing, build AOSP first, expected file ${vcLib}")
+    }
+    return vcLib.canonicalPath
+}
+/*apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs"
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    defaultConfig {
+        applicationId "com.logitech.integration.test"
+        minSdkVersion 29
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testBuildType System.getProperty('testBuildType', 'release')
+        testInstrumentationRunnerArgument 'androidx.benchmark.suppressErrors', 'CODE-COVERAGE,ACTIVITY-MISSING,UNSUSTAINED-ACTIVITY-MISSING,UNLOCKED,DEBUGGABLE'
+        testInstrumentationRunnerArgument 'androidx.benchmark.output.enable' , 'true'
+//profile a benchmark to investigate why the measured code is running slowly.
+        testInstrumentationRunnerArgument 'androidx.benchmark.profiling.mode', 'sampled'
+        //testInstrumentationRunner "androidx.benchmark.junit4.AndroidBenchmarkRunner"
+    }
+
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            testCoverageEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+ext {
+    camerax_version = "1.0.0-beta11"
+    nav_version = "2.3.1"
+}
+
+dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'com.github.tony19:logback-android:2.0.0'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4'
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha18"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:1.0.0-alpha18"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+    implementation "io.mockk:mockk-android:1.10.0"
+    // Navigation library
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+
+    compileOnly files(getZoomVendorLib())
+    implementation files(getVCServiceLib())
+
+    // Instrumented testing
+    androidTestCompileOnly files(getZoomVendorLib())
+    androidTestImplementation files(getVCServiceLib())
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.benchmark:benchmark-junit4:1.0.0'
+
+    androidTestImplementation "io.mockk:mockk-android:1.10.0"
+    androidTestImplementation 'com.google.guava:guava:29.0-android'
+}*/
+
+
+
+/*
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs"
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    defaultConfig {
+        applicationId "com.logitech.integration.test"
+        minSdkVersion 29
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        //testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	testInstrumentationRunner "com.zutubi.android.junitreport.JUnitReportTestRunner"
+        // The following argument makes the Android Test Orchestrator run its
+        // "pm clear" command after each test invocation. This command ensures
+        // that the app's state is completely cleared between tests.
+        //testInstrumentationRunnerArguments clearPackageData: 'true'
+        //testBuildType System.getProperty('testBuildType', 'debug')
+        //testInstrumentationRunner "androidx.benchmark.junit4.AndroidBenchmarkRunner"
+    }
+
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            testCoverageEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+}
+ext {
+    camerax_version = "1.0.0-beta11"
+    nav_version = "2.3.1"
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'com.github.tony19:logback-android:2.0.0'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha18"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:1.0.0-alpha18"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+
+    // Navigation library
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "io.mockk:mockk-android:1.10.0"
+
+
+    compileOnly files(getZoomVendorLib())
+    implementation files(getVCServiceLib())
+
+    // Instrumented testing
+    androidTestCompileOnly files(getZoomVendorLib())
+    androidTestImplementation files(getVCServiceLib())
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'de.schroepf:android-xml-run-listener:0.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.benchmark:benchmark-junit4:1.0.0'
+
+    androidTestImplementation "io.mockk:mockk-android:1.10.0"
+    androidTestImplementation 'com.google.guava:guava:29.0-android'
+}
+
+String getZoomVendorLib(){
+    //File zoomLib = new File("${getKongHome()}/out/soong/.intermediates/vendor/logi/frogger/frameworks/Zoom/com.logitech.platform.zoomvendor/android_common/combined/com.logitech.platform.zoomvendor.jar")
+    File zoomLib = new File("com.logitech.platform.zoomvendor.jar")
+    if (!zoomLib.isFile()){
+        throw new GradleException("Zoom vendor lib is missing, build AOSP first, expected file ${zoomLib}")
+    }
+    return zoomLib.canonicalPath
+}
+
+String getKongHome(){
+    return new File(project.rootDir, "../../../../").canonicalPath
+}
+
+String getVCServiceLib(){
+    File vcLib = new File("app/libs/LibLogiSystemService.jar")
+    if (!vcLib.isFile()){
+        throw new GradleException("VC services lib is missing, build AOSP first, expected file ${vcLib}")
+    }
+    return vcLib.canonicalPath
+}
+*/

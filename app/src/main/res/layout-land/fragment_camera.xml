@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<layout>
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.logitech.integration.test.camera.model.FocusViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.logitech.integration.test.views.FpsSurfaceView
+            android:id="@+id/fps_surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="@android:color/transparent" />
+
+        <ToggleButton
+            android:id="@+id/capture_button"
+            android:layout_width="@dimen/toggle_button_width"
+            android:layout_height="@dimen/toggle_button_height"
+            android:layout_marginRight="28dp"
+            android:background="@drawable/ic_shutter"
+            android:contentDescription="capture"
+
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            tools:ignore="RtlHardcoded" />
+        <SeekBar
+            android:id="@+id/focusSeekBar"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="17dp"
+
+            android:max="@{viewmodel.focusMax}"
+            android:progress="@={viewmodel.focusValue}"
+            android:min="@{viewmodel.focusMin}"
+            app:layout_constraintBottom_toBottomOf="@+id/overlay"
+            app:layout_constraintEnd_toEndOf="@+id/overlay"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/overlay"
+            app:layout_constraintTop_toTopOf="@+id/overlay"
+            app:layout_constraintVertical_bias="0.95" />
+        <CheckBox
+            android:id="@+id/autoFocusCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="AutoFocus"
+            android:checked="@={viewmodel.autoFocus}"
+            app:layout_constraintBottom_toTopOf="@+id/focusSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.018"
+            app:layout_constraintStart_toStartOf="@+id/fps_surface_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

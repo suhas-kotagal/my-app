@@ -24,7 +24,7 @@ pipeline {
         }
 		 stage('Benchmark') { 
             steps {
-                benchmark (	inputLocation: '', schemaSelection: ''Simplest - 1 level - One result only with parameters & thresholds.' , truncateStrings: 'true', altInputSchema: '', altInputSchemaLocation: '')
+                benchmark (	inputLocation: '', schemaSelection: 'Simplest - 1 level - One result only with parameters & thresholds.' , truncateStrings: 'true', altInputSchema: '', altInputSchemaLocation: '')
             }
         }
     }

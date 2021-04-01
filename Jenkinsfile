@@ -10,12 +10,13 @@ pipeline {
         stage('Test') { 
             steps {
                 sh "./gradlew connectedCheck -Pandroid.testInstrumentationRunnerArguments.class=com.logitech.integration.test.config.ConfigTest"
+		sh "ls"
             }
         }
     }
 post {
      always {
-     junit '/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
+     junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
      }
    }
 }

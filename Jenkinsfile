@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build & Clean') { 
             steps {
-				sh "./gradlew installDebug"
-				sh "./gradlew installDebugAndroidTest"
+		sh "./gradlew installDebug"
+		sh "./gradlew installDebugAndroidTest"
             }
         }
         stage('Test') { 
@@ -13,4 +13,9 @@ pipeline {
             }
         }
     }
+post {
+     always {
+     junit '/KongIntegrationTest/app/build/outputs/androidTest-results/connected/flavors/releaseAndroidTest/*.xml'
+     }
+   }
 }

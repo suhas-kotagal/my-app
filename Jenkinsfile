@@ -15,7 +15,7 @@ pipeline {
     }
 post {
      always {
-     junit '/KongIntegrationTest/app/build/outputs/androidTest-results/connected/flavors/releaseAndroidTest/*.xml'
+     junit '/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
      }
    }
 }

@@ -22,10 +22,9 @@ pipeline {
 		sh "ls"
             }
         }
-		 stage('Benchmark') { 
+		stage('Benchmark') { 
             steps {
-                benchmark '**/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/*.json'
-		sh "ls"
+                benchmark (	inputLocation: '', schemaSelection: ''Simplest - 1 level - One result only with parameters & thresholds.' , truncateStrings: 'true')
             }
         }
     }

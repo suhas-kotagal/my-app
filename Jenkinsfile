@@ -18,9 +18,11 @@ pipeline {
         }
     }
 post {
-     always {
-     junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml',
-     benchmark '**/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/**/*.json'
+     success {
+     junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
      }
+	always {
+         benchmark '**/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/**/*.json'
+	}
    }
 }

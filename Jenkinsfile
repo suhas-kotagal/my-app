@@ -20,6 +20,7 @@ pipeline {
 post {
      always {
      junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
+     benchmark '**/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/**/*.json'
      }
    }
 }

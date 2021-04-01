@@ -1,6 +1,6 @@
 pipeline {
     agent any 
-    triggers {
+	    triggers {
         cron('H 21 * * 1-5')
     }
     stages {
@@ -16,13 +16,17 @@ pipeline {
 		sh "ls"
             }
         }
+		stage('Junit report') { 
+            steps {
+                junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
+		sh "ls"
+            }
+        }
+		 stage('Benchmark') { 
+            steps {
+                benchmark '**/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/*.json'
+		sh "ls"
+            }
+        }
     }
-post {
-     success {
-     junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
-     }
-	always {
-         benchmark '**/app/build/outputs/connected_android_test_additional_output/debugAndroidTest/connected/**/*.json'
-	}
-   }
 }

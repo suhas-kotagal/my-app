@@ -5,6 +5,9 @@ pipeline {
 	 string(name: 'DEVICE_SERIAL_ID', defaultValue: '', description: 'Kong device ID. Leave it empty for the default behavior')
     }
     agent any
+    options {
+        timestamps()
+    }
     environment {
         DEVICE_SERIAL_ID = "${params.DEVICE_SERIAL_ID ? params.DEVICE_SERIAL_ID : serialID.get(NODE_NAME)}"
     } 

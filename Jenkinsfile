@@ -27,16 +27,11 @@ pipeline {
 		sh "ls"
             }
         }
-		stage('Junit report') { 
-            steps {
-                junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
-		sh "ls"
-            }
-        }
-		 stage('Benchmark') { 
-            steps {
-                benchmark (	inputLocation: '', schemaSelection: 'Simplest - 1 level - One result only with parameters & thresholds.' , truncateStrings: 'true', altInputSchema: '', altInputSchemaLocation: '')
-            }
-        }
+post {
+     success {
+     junit '**/app/build/outputs/androidTest-results/connected/flavors/debugAndroidTest/*.xml'
+    benchmark (	inputLocation: '', schemaSelection: 'Simplest - 1 level - One result only with parameters & thresholds.' , truncateStrings: 'true', altInputSchema: '', altInputSchemaLocation: '')
+     }
+   }
     }
 }

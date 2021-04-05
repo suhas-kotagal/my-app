@@ -1,3 +1,5 @@
+def serialID = ['kong-services-ci-2': "KADBJ0B022600811", 'kong-services-ci-1': "KADBJ0B022600913"]
+
 pipeline {
     parameters {
 	 string(name: 'BUILD_AGENT_LINUX', defaultValue: 'kong-services-ci', description: 'Name of the build agent')

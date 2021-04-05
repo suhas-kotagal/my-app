@@ -5,9 +5,7 @@ pipeline {
 	 string(name: 'BUILD_AGENT_LINUX', defaultValue: 'kong-services-ci', description: 'Name of the build agent')
 	 string(name: 'DEVICE_SERIAL_ID', defaultValue: '', description: 'Kong device ID. Leave it empty for the default behavior')
     }
-    agent {
-        label "${params.BUILD_AGENT_LINUX}"
-    }
+    agent any
     environment {
         DEVICE_SERIAL_ID = "${params.DEVICE_SERIAL_ID ? params.DEVICE_SERIAL_ID : serialID.get(NODE_NAME)}"
     } 

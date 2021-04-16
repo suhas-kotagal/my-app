@@ -1,4 +1,4 @@
-package com.logitech.integration.test.camera
+/*package com.logitech.integration.test.camera
 import androidx.lifecycle.ViewModelProvider
 import androidx.test.filters.MediumTest
 import com.google.common.base.Stopwatch
@@ -104,3 +104,4 @@ class CameraFocusTest(val fps: Int, val videoSize: VideoSize) {
         blueShellRule.finish()
     }
 }
+*/

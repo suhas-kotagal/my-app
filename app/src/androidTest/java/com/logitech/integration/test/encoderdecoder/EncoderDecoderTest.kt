@@ -1,4 +1,4 @@
-package com.logitech.integration.test.encoderdecoder
+/*package com.logitech.integration.test.encoderdecoder
 
 import androidx.benchmark.junit4.BenchmarkRule
 import androidx.benchmark.junit4.measureRepeated
@@ -26,3 +26,4 @@ class EncoderDecoderTest {
     }
 }
 
+*/

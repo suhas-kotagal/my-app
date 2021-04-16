@@ -1,4 +1,4 @@
-package com.logitech.integration.test
+/*package com.logitech.integration.test
 
 import android.content.ContentValues
 import android.net.Uri
@@ -32,12 +32,12 @@ class Tester {
 
         var CONTENT_URI_REPORT = Uri.parse("content://com.logitech.test.support/report?runId=$runId")
 
-/*        val builder = Uri.Builder()
+        val builder = Uri.Builder()
         builder
 
             .authority("content://com.logitech.test.support")
             .appendPath("report")
-            .appendQueryParameter("runId", runId)*/
+            .appendQueryParameter("runId", runId)
         Log.d("KONGINTEGRATION", "sleeping 10")
         Thread.sleep(10000)
         Log.d("KONGINTEGRATION", "sleeping 10 over")
@@ -78,4 +78,4 @@ class Tester {
 
     }
 
-}
+}*/

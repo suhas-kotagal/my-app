@@ -1,4 +1,4 @@
-package com.logitech.integration.test.camera
+/*package com.logitech.integration.test.camera
 
 
 import android.media.MediaRecorder
@@ -269,7 +269,7 @@ class CameraPtzTestBlueShell(
         val results = blueShellRule.activityScenario?.result
         assertNotNull(results)
     }
-*/
+
     @After
     fun cleanup() {
         outputFile?.let {
@@ -280,3 +280,4 @@ class CameraPtzTestBlueShell(
     }
 }
 
+*/

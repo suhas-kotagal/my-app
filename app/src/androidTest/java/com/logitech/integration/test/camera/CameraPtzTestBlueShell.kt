@@ -34,7 +34,7 @@ import java.io.File
  *  adb shell am instrument -w -r -e coverageFile /data/data/com.logitech.integration.test/coverage.ec -e coverage true -e class 'com.logitech.integration.test.CameraPtzTestBlueShell' com.logitech.integration.test.test/androidx.test.runner.AndroidJUnitRunner
  *  adb shell am instrument -w -r -e coverageFile /data/data/com.logitech.integration.test/coverage.ec -e coverage true -e class 'com.logitech.integration.test.CameraPtzTestBlueShell' com.logitech.integration.test.test/androidx.test.runner.AndroidJUnitRunner
  * START FLAGS IS: cn = ComponentInfo{com.logitech.integration.test.test/androidx.test.runner.AndroidJUnitRunner}, pf = null, flags=0, args=Bundle[{coverageFile=/data/data/com.logitech.integration.test/coverage.ec, coverage=true, class=com.logitech.integration.test.CameraPtzTestBlueShell}], watcher=com.android.commands.am.Instrument$InstrumentationWatcher@9cfdba6, connection=android.app.UiAutomationConnection@ad149e7, userId = -2, abi=null
- */
+ 
 
 const val DEFAULT_SPEED = 0f
 
@@ -102,7 +102,7 @@ class CameraPtzTestBlueShell(
         loopEncode()
         loopDecode()
 
-    }*/
+    }
 
     @Test
     @MediumTest
@@ -125,7 +125,7 @@ class CameraPtzTestBlueShell(
                 rangeSet.panRange.min.toFloat(),
                 rangeSet.tiltRange.min.toFloat(),
                 rangeSet.zoomRange.min.toFloat()
-            )*/
+            )
 
 
             //ptzDevice.applyMovementAndAssert(ptzServiceHelper, PtzDevice.MOVE_ABSOLUTE, rangeSet.panRange.max.toFloat(), rangeSet.tiltRange.max.toFloat(), rangeSet.zoomRange.max.toFloat())

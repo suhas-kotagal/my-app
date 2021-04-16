@@ -15,16 +15,16 @@ pipeline {
         cron('H 21 * * 1-5')
     }
     stages {
-        stage('Build & Clean') { 
+        stage('Build & Install') { 
             steps {
+		sh "./gradlew clean"
 		sh "./gradlew installDebug"
 		sh "./gradlew installDebugAndroidTest"
             }
         }
         stage('Test') { 
             steps {
-                sh "./gradlew connectedCheck -Pandroid.testInstrumentationRunnerArguments.class=com.logitech.integration.test.config.ConfigTest"
-		sh "ls"
+                sh "./gradlew connectedCheck"
             }
         }
     }

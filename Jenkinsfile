@@ -17,7 +17,6 @@ pipeline {
     stages {
         stage('Build & Install') { 
             steps {
-		sh "./gradlew clean"
 		sh "./gradlew installDebug"
 		sh "./gradlew installDebugAndroidTest"
             }

@@ -12,7 +12,7 @@ pipeline {
         DEVICE_SERIAL_ID = "${params.DEVICE_SERIAL_ID ? params.DEVICE_SERIAL_ID : serialID.get(NODE_NAME)}"
     } 
     triggers {
-        cron('H 19 * * 1-5')
+        cron('H 20 * * 1-5')
     }
     stages {
         stage('Build & Install') { 

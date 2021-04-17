@@ -3,9 +3,6 @@ package com.logitech.integration.test.config
 import androidx.test.filters.MediumTest
 import com.logitech.integration.test.helpers.config.*
 import org.junit.Test
-import androidx.benchmark.junit4.BenchmarkRule
-import androidx.benchmark.junit4.measureRepeated
-import org.junit.Rule
 
 
 /**
@@ -19,17 +16,13 @@ import org.junit.Rule
  */
 class ConfigTest() {
 
-    @get:Rule
-    val benchmarkRule = BenchmarkRule()
-    
-    /*@Test
+    @Test
     @MediumTest
     fun bluetoothTest() {
-        
         ConfigServiceHelper().use { configServiceHelper ->
             bluetoothOnOff(configServiceHelper)
         }
-        
+
     }
 
     @Test
@@ -38,15 +31,13 @@ class ConfigTest() {
         ConfigServiceHelper().use { configServiceHelper ->
             aicvModesTest(configServiceHelper)
         }
-    }*/
+    }
 
     @Test
     @MediumTest
     fun fwUpdateTest() {
-    benchmarkRule.measureRepeated {
         ConfigServiceHelper().use { configServiceHelper ->
             fwPeriodicCheck(configServiceHelper)
-        }
         }
     }
 

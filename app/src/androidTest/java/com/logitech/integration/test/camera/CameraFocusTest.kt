@@ -1,4 +1,4 @@
-/*package com.logitech.integration.test.camera
+package com.logitech.integration.test.camera
 import androidx.lifecycle.ViewModelProvider
 import androidx.test.filters.MediumTest
 import com.google.common.base.Stopwatch
@@ -16,6 +16,9 @@ import org.junit.runners.Parameterized
 import org.slf4j.LoggerFactory
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+
+
+const val FOCUS_ITERATIONS = 10
 
 @RunWith(Parameterized::class)
 class CameraFocusTest(val fps: Int, val videoSize: VideoSize) {
@@ -53,9 +56,8 @@ class CameraFocusTest(val fps: Int, val videoSize: VideoSize) {
             Thread.sleep(1000)
             blueShellRule.blockingWithServiceHelper({ ptzHelper ->
                 val focusRange = ptzHelper.getFocusRange()
-                val times = 20
                 val stopwatch = Stopwatch.createStarted()
-                for (times in 0..times) {
+                for (times in 0..FOCUS_ITERATIONS) {
                     for (i in focusRange.min..focusRange.max) {
                         viewModel.camera2InputFocusValue.value = i
                     }
@@ -65,9 +67,9 @@ class CameraFocusTest(val fps: Int, val videoSize: VideoSize) {
                 logger.info("Test Done.")
                 val elapsed = stopwatch.elapsed(TimeUnit.MILLISECONDS)
                 val positionChangesSingleIteration = Math.abs(focusRange.max - focusRange.min)
-                val positionChangesTotal = positionChangesSingleIteration * times
-                val timePerIterationMs = elapsed / times.toFloat()
-                logger.info("Result: Test completed ${times} iterations in ${elapsed} ms  (${String.format("%.2f", timePerIterationMs)} ms per iteration)")
+                val positionChangesTotal = positionChangesSingleIteration * FOCUS_ITERATIONS
+                val timePerIterationMs = elapsed / FOCUS_ITERATIONS.toFloat()
+                logger.info("Result: Test completed ${FOCUS_ITERATIONS} iterations in ${elapsed} ms  (${String.format("%.2f", timePerIterationMs)} ms per iteration)")
                 logger.info("Result:     ${positionChangesTotal} total position changes, avg time per position change = ${String.format("%.2f", timePerIterationMs / positionChangesSingleIteration)} ms")
 
                 finishLatch.countDown()
@@ -76,6 +78,7 @@ class CameraFocusTest(val fps: Int, val videoSize: VideoSize) {
 
         }
         finishLatch.await(100, TimeUnit.SECONDS)
+        blueShellRule.finish()
     }
 
     @Test
@@ -85,9 +88,8 @@ class CameraFocusTest(val fps: Int, val videoSize: VideoSize) {
         // TODO: measure with benchmark rul
         blueShellRule.blockingWithServiceHelper({ ptzHelper ->
             val focusRange = ptzHelper.getFocusRange()
-            val times = 20
             val stopwatch = Stopwatch.createStarted()
-            for (times in 0..times) {
+            for (times in 0..FOCUS_ITERATIONS) {
                 for (i in focusRange.min..focusRange.max) {
                     ptzHelper.setAbsolute(PtzfTypeWrapper.FOCUS, i)
                 }
@@ -96,12 +98,11 @@ class CameraFocusTest(val fps: Int, val videoSize: VideoSize) {
             }
             val elapsed = stopwatch.elapsed(TimeUnit.MILLISECONDS)
             val positionChangesSingleIteration = Math.abs(focusRange.max - focusRange.min)
-            val positionChangesTotal = positionChangesSingleIteration * times
-            val timePerIterationMs = elapsed / times.toFloat()
-            logger.info("Result: Test completed ${times} iterations in ${elapsed} ms  (${String.format("%.2f", timePerIterationMs)} ms per iteration)")
+            val positionChangesTotal = positionChangesSingleIteration * FOCUS_ITERATIONS
+            val timePerIterationMs = elapsed / FOCUS_ITERATIONS.toFloat()
+            logger.info("Result: Test completed ${FOCUS_ITERATIONS} iterations in ${elapsed} ms  (${String.format("%.2f", timePerIterationMs)} ms per iteration)")
             logger.info("Result:     ${positionChangesTotal} total position changes, avg time per position change = ${String.format("%.2f", timePerIterationMs / positionChangesSingleIteration)} ms")
         })
         blueShellRule.finish()
     }
 }
-*/

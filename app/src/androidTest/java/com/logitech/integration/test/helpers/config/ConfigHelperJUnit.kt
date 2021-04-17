@@ -63,4 +63,3 @@ fun fwPeriodicCheck(configServiceHelper: ConfigServiceHelper) {
     Assert.assertEquals(periodicCheck, periodicCheckPeriod)
 }
 
-

@@ -22,15 +22,10 @@ fun PtzDevice.assertPosition(value:Float, ptzType: PtzfTypeWrapper) {
 }
 
 fun PtzDevice.assertFloatPosition(value: Float? = null, positionValue: Float) {
-    logger().info("KONGINTEGRATION - expected: $positionValue, actual: $value")
     value?.let { Assert.assertEquals(positionValue, value, FLOAT_DELTA) }
 }
 
 fun PtzDevice.assertPositions(pan:Float? = null, tilt:Float? = null, zoom:Float? = null) {
-    logger().info("KONGINTEGRATION - expected: $panPosition, actual: $pan")
-    logger().info("KONGINTEGRATION - expected: $tiltPosition, actual: $tilt")
-    logger().info("KONGINTEGRATION - expected: $zoomPosition, actual: $zoom")
-
     pan?.let { Assert.assertEquals(panPosition, pan, FLOAT_DELTA) }
     tilt?.let { Assert.assertEquals(tiltPosition, tilt, FLOAT_DELTA) }
     zoom?.let { Assert.assertEquals(zoomPosition, zoom, FLOAT_DELTA) }
@@ -43,16 +38,16 @@ fun PtzDevice.assertPositions(pan:Float? = null, tilt:Float? = null, zoom:Float?
 
 
 fun PtzDevice.centerAndAssert(ptzServiceHelper: PtzServiceHelper, timeout : Long = 100, timeUnit: TimeUnit = TimeUnit.SECONDS){
-    logger().info("KONGINTEGRATION - Centering the device")
+    logger().info("Centering the device")
     applyMovementAndAssert(ptzServiceHelper, PtzDevice.MOVE_ABSOLUTE, 0F, 0F, 290f)
-    logger().info("KONGINTEGRATION - Device is centered.")
+    logger().info("Device is centered.")
 }
 
 /**
  * Move the camera to a PTZ position and verify that the camera is reporting that it made it to the expected position
  *
  */
-fun PtzDevice.applyMovementAndAssert(ptzServiceHelper: PtzServiceHelper, movementType: Int, panValue: Float, tiltValue: Float, zoomValue: Float, timeout : Long = 90, timeUnit: TimeUnit = TimeUnit.SECONDS){
+fun PtzDevice.applyMovementAndAssert(ptzServiceHelper: PtzServiceHelper, movementType: Int, panValue: Float, tiltValue: Float, zoomValue: Float, timeout : Long = 30, timeUnit: TimeUnit = TimeUnit.SECONDS){
     logger().info("Setting movement values P/T/Z = {}/{}/{}", panValue, tiltValue, zoomValue)
     val valuesNotInPosition = getNonPositionedSet(panValue, tiltValue, zoomValue)
     setPosition(movementType, panValue, tiltValue, zoomValue)
@@ -106,7 +101,7 @@ fun PtzDevice.applyZoomMovementAndAssert(ptzServiceHelper: PtzServiceHelper, mov
         ptzServiceHelper.ptzListenerHelper.waitForPositionChange(
             valuesNotInPosition, timeout, timeUnit
         )
-        if (zoomValue == -1.0f) assertFloatPosition(100f, zoomPosition)
+        if (zoomValue == -1f) assertFloatPosition(100f, zoomPosition)
         else assertFloatPosition(zoomValue, zoomPosition)
     }
 }
@@ -135,5 +130,4 @@ fun PtzDevice.applyMovementAndAssert(ptzServiceHelper: PtzServiceHelper, value: 
 
     assertPosition(value, movementType)
 }
-
 

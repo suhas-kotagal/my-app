@@ -5,4 +5,3 @@ fun getFWPeriodicCheck(): Int {
         return fwUpdateServiceHelper.fwupdateManager.periodicCheckPeriod
     }
 }
-

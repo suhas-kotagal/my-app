@@ -2,15 +2,14 @@ package com.logitech.integration.test.helpers.audio
 
 import android.content.Context.AUDIO_SERVICE
 import android.media.AudioManager
-import android.util.Log
 import android.view.KeyEvent.KEYCODE_VOLUME_DOWN
 import android.view.KeyEvent.KEYCODE_VOLUME_UP
 import androidx.test.platform.app.InstrumentationRegistry
+import com.logitech.integration.test.helpers.common.pollForResult
 import com.logitech.integration.test.common.MAX_VOLUME
 import com.logitech.integration.test.common.SKIP_ASSERT_EQUALS
 import com.logitech.integration.test.common.SLEEP_INTERVAL_MS
 import com.logitech.integration.test.common.SLEEP_TIME_MS
-import com.logitech.integration.test.helpers.common.pollForResult
 import com.logitech.integration.test.helpers.common.sendInputEvent
 import com.logitech.service.models.audio.OptionalResult
 import com.logitech.service.models.audio.Topology
@@ -19,7 +18,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
-var appContext = InstrumentationRegistry.getInstrumentation().targetContext
+private var appContext = InstrumentationRegistry.getInstrumentation().targetContext
 
 private fun assertOptionalResult(
     optionalResult: OptionalResult,
@@ -31,7 +30,8 @@ private fun assertOptionalResult(
         Assert.assertNotNull(optionalResult.result)
         if (expectedResult != SKIP_ASSERT_EQUALS) Assert.assertEquals(
             expectedResult,
-            optionalResult.result)
+            optionalResult.result
+        )
     } else {
         Assert.assertTrue(optionalResult.status)
         Assert.assertTrue(optionalResult.result != 0)
@@ -39,7 +39,6 @@ private fun assertOptionalResult(
 }
 
 fun setGetAudioProcessing(audioServiceHelper: AudioServiceHelper) {
-    Log.d("KONGINTEGRATION" , "inside test")
     var audioProcessing = audioServiceHelper.audioManager.setAudioProcessing(true)
     Assert.assertTrue(audioProcessing)
 
@@ -51,7 +50,6 @@ fun setGetAudioProcessing(audioServiceHelper: AudioServiceHelper) {
 
     result = audioServiceHelper.audioManager.audioProcessing
     assertOptionalResult(result, 0, true)
-    Log.d("KONGINTEGRATION" , "test completed")
 }
 
 fun sendVolumeUpKeyEvents(audioServiceHelper: AudioServiceHelper) {
@@ -85,13 +83,10 @@ fun sendVolumeDownKeyEvents(audioServiceHelper: AudioServiceHelper) {
 }
 
 fun hardwareTopology(audioServiceHelper: AudioServiceHelper) {
-    audioServiceHelper.audioListener.logger.info("KONGINTEGRATION starting topology test")
     var result: OptionalResult = audioServiceHelper.audioManager.topology
-    audioServiceHelper.audioListener.logger.info("KONGINTEGRATION topology optional result: $result")
     var topo: ArrayList<Topology> = result.topologyData
     Assert.assertNotNull(topo)
     assertOptionalResult(result, SKIP_ASSERT_EQUALS, true)
-    audioServiceHelper.audioListener.logger.info("KONGINTEGRATION completed topology test")
 }
 
 fun micAudioControls(audioServiceHelper: AudioServiceHelper) {
@@ -117,7 +112,7 @@ fun speakerAudioControls(audioServiceHelper: AudioServiceHelper) {
     audioServiceHelper.audioManager.setSpeakerMute(true)
     var result: OptionalResult = audioServiceHelper.audioManager.speakerMute
     assertOptionalResult(result, 0, false)
-Assert.assertNotNull(null)
+
     audioServiceHelper.audioManager.setSpeakerMute(false)
     result = audioServiceHelper.audioManager.speakerMute
     assertOptionalResult(result, 0, true)
@@ -147,7 +142,6 @@ fun sendMotionStateTest(audioServiceHelper: AudioServiceHelper) {
 }
 
 fun setAudioDeviceMode(audioServiceHelper: AudioServiceHelper, setDeviceMode: Boolean): Boolean {
-    Log.d("KONGINTEGRATION" , "changing device modes")
     var deviceMode = audioServiceHelper.audioManager.deviceMode.result
     if (setDeviceMode != deviceMode.toBoolean()) {
         audioServiceHelper.audioManager.setDeviceMode(setDeviceMode)
@@ -156,7 +150,6 @@ fun setAudioDeviceMode(audioServiceHelper: AudioServiceHelper, setDeviceMode: Bo
             false -> Assert.assertEquals(0, audioServiceHelper.audioManager.deviceMode.result)
         }
     }
-    Log.d("KONGINTEGRATION" , "changing device modes complete")
     return deviceMode.toBoolean()
 }
 

@@ -2,8 +2,8 @@ package com.logitech.integration.test.helpers.remote
 
 import android.os.Binder
 import android.os.IBinder
-import com.logitech.integration.test.common.VERIFY_TIMEOUT_MS
 import com.logitech.service.models.remote.RemoteMode
+import com.logitech.integration.test.common.VERIFY_TIMEOUT_MS
 import io.mockk.verify
 import org.junit.Assert
 
@@ -16,17 +16,10 @@ fun modeChangeAndAssert(remoteServiceHelper: RemoteServiceHelper) {
         remoteServiceHelper.remoteListener.logger.info("Cannot run Remote test cases in: $currentMode mode")
         return
     }
-    changeRemoteModeAndAssert(
-        remoteServiceHelper,
-        RemoteMode.ui,
-        remoteBinder
-    )
-    changeRemoteModeAndAssert(
-        remoteServiceHelper,
-        RemoteMode.teams,
-        remoteBinder
-    )
+    changeRemoteModeAndAssert(remoteServiceHelper, RemoteMode.ui, remoteBinder)
+    changeRemoteModeAndAssert(remoteServiceHelper, RemoteMode.teams, remoteBinder)
 }
+
 
 fun changeRemoteModeAndAssert(
     remoteServiceHelper: RemoteServiceHelper,
@@ -44,10 +37,4 @@ fun changeRemoteModeAndAssert(
         remoteServiceHelper.remoteListener.listenerMock.onModeChanged(RemoteMode.ptz)
     }
     Assert.assertEquals(RemoteMode.ptz, remoteServiceHelper.remoteManager.remoteMode)
-}
-
-fun test(): Boolean{
-    synchronized(Object()){
-        return true
-    }
 }

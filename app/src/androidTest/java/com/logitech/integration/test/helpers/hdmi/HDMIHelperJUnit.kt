@@ -46,7 +46,7 @@ fun sendCEC(hdmiServiceHelper: HDMIServiceHelper) {
     var index = 2
     var displayManager =
         appContext.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
-    displayManager.registerDisplayListener(TrackingDisplayListener(), null)
+   // displayManager.registerDisplayListener(TrackingDisplayListener(), null)
 
     var list: List<HDMIStatus> = hdmiServiceHelper.hdmiManager.hdmiOutStatus
     hdmiServiceHelper.logger.info("KONGINTEGRATION - list size: ${list.size}")
@@ -98,7 +98,7 @@ fun sendCECOFFAndWait(
     displayManager: DisplayManager
 ) {
     hdmiServiceHelper.logger.info(
-        "KONGINTEGRATION - sending CEC OFF= ${
+        "KONGINTEGRATION - sending CEC OFF to another repo again= ${
             hdmiServiceHelper.hdmiManager.sendCecOff(index)
         }"
     )
@@ -198,7 +198,7 @@ fun sendCECONAndWait(
     displayManager: DisplayManager
 ) {
     hdmiServiceHelper.logger.info(
-        "KONGINTEGRATION - sending CEC ON= ${
+        "KONGINTEGRATION - sending CEC ON to another repo again= ${
             hdmiServiceHelper.hdmiManager.sendCecOn(index)
         }"
     )

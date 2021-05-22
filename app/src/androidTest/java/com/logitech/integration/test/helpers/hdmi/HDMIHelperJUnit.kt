@@ -241,7 +241,7 @@ fun sendCECONAndWait(
     )
 
     displayManager.displays.forEach {
-        //it.displayId and index might be same, so we can assert if that is the same which got STATE_ON as it.state
+        //it.displayId and index might be same, so we can assert if that is the same which got STATE_ON as it.state a new addition
         hdmiServiceHelper.logger.info("KONGINTEGRATION - post displays: name - ${it.name}, id - ${it.displayId},state -  ${it.state}, isHDR - ${it.isHdr}")
     }
 }

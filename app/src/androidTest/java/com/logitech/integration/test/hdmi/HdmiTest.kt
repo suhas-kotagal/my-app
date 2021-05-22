@@ -1,8 +1,9 @@
-/*package com.logitech.integration.test.hdmi
+package com.logitech.integration.test.hdmi
 
 import com.logitech.integration.test.helpers.hdmi.HDMIServiceHelper
 import com.logitech.integration.test.helpers.hdmi.sendCEC
 import org.junit.Test
+import android.util.Log
 
 
 /**
@@ -20,8 +21,9 @@ class HdmiTest() {
     @Test
     fun hdmiCecTest() {
         HDMIServiceHelper().use { hdmiServiceHelper ->
+            Log.d("KONGINTEGRATION","printing logs commit")
             sendCEC(hdmiServiceHelper)
         }
     }
 }
-*/
+

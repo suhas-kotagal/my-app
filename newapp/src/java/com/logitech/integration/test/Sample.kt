@@ -1,3 +1,3 @@
 fun sampleTest(){
-    android.util.Log.d("KONGINTEGRATION", "Sample test here")
+    android.util.Log.d("KONGINTEGRATION", "Editing Sample test here")
 }
